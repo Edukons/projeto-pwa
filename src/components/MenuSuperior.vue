@@ -4,12 +4,14 @@ import { ref } from 'vue';
 import CartPlus from 'vue-material-design-icons/CartPlus.vue';
 import Account from 'vue-material-design-icons/Account.vue';
 import Menu from 'vue-material-design-icons/Menu.vue';
+import { useScreen } from '@/composables/screen';
 
+const { browserWidth, deviceWidth, isMobile } = useScreen();
 const menuAberto = ref(false);
 </script>
 
 <template>
-    <header>
+    <header v-if="isMobile = true">
       <div class="header--logo">
         <img src="@/assets/logoFakeStore.png" alt="Logo" />
         <h1>FakeStore</h1>
@@ -28,7 +30,19 @@ const menuAberto = ref(false);
         <CartPlus />
         <Menu class="menu-hamburger" @click="menuAberto = !menuAberto" />
       </div>
-    </header>
+    </header> 
+<!-- Fazer o outro menu a partir do v-bind -->
+    <nav>
+
+        <ul :class="isMobile ? 'mobile' : ''">
+          <li>Home</li>
+          <li>Eletrônicos</li>
+          <li>Jóias</li>
+          <li>Masculino</li>
+          <li>Feminino</li>
+        </ul>
+      </nav>
+
   </template>
 
 <style scoped>
